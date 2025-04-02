@@ -1,8 +1,8 @@
 # Modular Discord Bot
 ## Why
-This repository is made for people that want to make a custom Discord bot, with proper functional, that is easy to setup and does not require (almost) any coding experience
-Or if you're lazy and just want an already made bot
-Or if you want to expend the functionality of this bot much further
+* This repository is made for people that want to make a custom Discord bot, with proper functional, that is easy to setup and does not require (almost) any coding experience
+* Or if you're lazy and just want an already made bot
+* Or if you want to expend the functionality of this bot much further
 
 ## Installing
 1. Make sure you have Python 3.11 or later installed.
