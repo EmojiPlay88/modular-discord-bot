@@ -2,9 +2,10 @@ import discord
 import os
 from discord.ext.commands import Bot
 
+global token
+
 intents = discord.Intents.all()
 bot = Bot(intents=intents, command_prefix='!')
-global token
 
 with open('token.txt', 'r') as file:
     token = file.read()
@@ -14,6 +15,7 @@ async def on_ready():
     print(f'Logged on as {bot.user} (ID: {bot.user.id})')
 
 async def main():
+    #Load all of the extensions in /modules/
     for file in os.listdir("./modules"):
         if file.endswith(".py"):
             await bot.load_extension(f"modules.{file[:-3]}")
