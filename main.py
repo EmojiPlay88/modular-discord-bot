@@ -1,6 +1,6 @@
 import discord
+import os
 from discord.ext.commands import Bot
-from modules.ping import Ping
 
 intents = discord.Intents.all()
 bot = Bot(intents=intents, command_prefix='!')
@@ -14,7 +14,9 @@ async def on_ready():
     print(f'Logged on as {bot.user} (ID: {bot.user.id})')
 
 async def main():
-    await bot.load_extension('modules.ping')
+    for file in os.listdir("./modules"):
+        if file.endswith(".py"):
+            await bot.load_extension(f"modules.{file[:-3]}")
     await bot.start(token)
 
 #---------------------------------------------------------------------------------
