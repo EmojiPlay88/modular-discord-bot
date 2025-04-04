@@ -1,4 +1,8 @@
 # Modular Discord Bot
+##PLEASE NOTICE!
+
+This project is far from being even runnable, so if you want to accelerate the development process, you can make a pull request <3
+
 ## Why
 * This repository is made for people that want to make a custom Discord bot, with proper functional, that is easy to setup and does not require (almost) any coding experience
 * Or if you're lazy and just want an already made bot
