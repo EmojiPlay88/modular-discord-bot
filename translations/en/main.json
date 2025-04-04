@@ -1,6 +1,9 @@
 {
   "setlang": {
     "success": "Language set successfully!",
-    "noperms": "Looks like you don't have permissions for that..."
+    "noperms": "Looks like you don't have permissions for that...",
+    "error": "Error! Something went wrong...",
+    "nofolder": "Error! That language is not supported.",
+    "nofile": "Error! No translation file found."
   },
 }

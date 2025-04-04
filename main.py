@@ -27,7 +27,7 @@ class MainCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @discord.app_commands.command(name='setlanguage', description='Sets the language of the bot for the server.')
+    @commands.command()
     async def setLanguage(self, interaction:discord.Interaction, language: str):
         prompt = openLanguageFile(language)
         if not checkPermissions(interaction.user, 1024):
