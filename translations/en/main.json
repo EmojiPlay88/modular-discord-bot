@@ -5,5 +5,5 @@
     "error": "Error! Something went wrong...",
     "nofolder": "Error! That language is not supported.",
     "nofile": "Error! No translation file found."
-  },
+  }
 }

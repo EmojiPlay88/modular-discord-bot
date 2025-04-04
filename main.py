@@ -39,6 +39,13 @@ class MainCommands(commands.Cog):
             await interaction.response(text=prompt['langchanged']['success'])
 
 @bot.event
+async def on_command_error(ctx, error):
+    # Log the error to the console
+    print(f'An error occurred: {error}')
+    # Optionally, send the error message to the Discord channel
+    await ctx.send(f'An error occurred: {error}')
+
+@bot.event
 async def on_ready():
     await bot.tree.sync()
     print(f'Logged on as {bot.user} (ID: {bot.user.id})')
