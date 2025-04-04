@@ -1,4 +1,5 @@
 import discord
+import os
 
 def getLanguages():
     availableLanguages = []
