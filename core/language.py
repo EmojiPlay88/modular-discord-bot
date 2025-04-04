@@ -8,5 +8,5 @@ def getLanguages():
 
 def openLanguageFile(language:str):
     filename = os.path.basename(__file__)
-    with open(f'./translations/{language}/{filename}.jso>
+    with open(f'./translations/{language}/{filename}.json'):
         return file.read().json()
