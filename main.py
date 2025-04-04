@@ -27,7 +27,7 @@ class MainCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.hybrid_command(name="setlanguage", description="Set language for the server")
     async def setLanguage(self, interaction:discord.Interaction, language: str):
         prompt = openLanguageFile(language)
         if not checkPermissions(interaction.user, 1024):
@@ -40,6 +40,7 @@ class MainCommands(commands.Cog):
 
 @bot.event
 async def on_ready():
+    await bot.tree.sync()
     print(f'Logged on as {bot.user} (ID: {bot.user.id})')
 
 async def main():
@@ -47,6 +48,8 @@ async def main():
     for file in os.listdir("./modules"):
         if file.endswith(".py"):
             await bot.load_extension(f"modules.{file[:-3]}")
+            print(f"Loaded {file}")
+    await bot.add_cog(MainCommands(bot))
     await bot.start(token)
 
 #---------------------------------------------------------------------------------
