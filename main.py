@@ -3,7 +3,7 @@ import os
 import asyncio
 import configparser
 import json
-from core.perms import checkPermissions
+from core.perms import checkPermissions, findRole
 from core.language import getLanguages, openLanguageFile
 from discord import app_commands
 from discord.ext import commands
@@ -11,6 +11,7 @@ from discord.ext.commands import Bot
 
 global token
 global config
+global filename
 
 #Defining the bot
 intents = discord.Intents.all()
@@ -19,6 +20,8 @@ bot = Bot(intents=intents, command_prefix='!')
 #Initializing the main config file
 config = configparser.ConfigParser()
 config.read('./configs/main.cfg')
+
+filename = os.path.basename(__file__)
 
 with open('token.txt', 'r') as file:
     token = file.read()
@@ -29,7 +32,8 @@ class MainCommands(commands.Cog):
 
     @commands.hybrid_command(name="setlanguage", description="Set language for the server")
     async def setLanguage(self, interaction:discord.Interaction, language: str):
-        prompt = openLanguageFile(language)
+        permsAvailable
+        prompt = openLanguageFile(filename[:-3], language)
         if not checkPermissions(interaction.user, 1024):
             await interaction.response(text=prompt['setlang']['noperms'])
         else:
