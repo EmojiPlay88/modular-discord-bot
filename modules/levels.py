@@ -41,7 +41,7 @@ class LevelCommands(commands.Cog):
         await ctx.send(f'Your xp and level is{xp, lvl}')
 
     @bot.event
-    async def on_message(message):
+    async def on_message(message): ##this not finished (Emoji dont touch it!) 
         if message.author.bot:
             return
     
