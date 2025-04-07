@@ -2,9 +2,10 @@
 token.txt
 /modules/__pycache__
 /core/__pycache__
-./pyvenv.cfg
-./Scripts
-./.venv.iml
+/pyvenv.cfg
+/Scripts
+.venv.iml
+/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
