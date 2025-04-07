@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import json
+from main import bot
 
 def guildcheck(guildid):
     with open("data/levels.json", 'r',encoding='utf=8') as file:
@@ -38,11 +39,14 @@ class LevelCommands(commands.Cog):
         xp = levels[gid] [uid] [0]
         lvl = levels[gid] [uid] [1]
         await ctx.send(f'Your xp and level is{xp, lvl}')
+
+    @bot.event
+    async def on_message(message):
+        if message.author.bot:
+            return
     
 async def setup(bot):
     await bot.add_cog(LevelCommands(bot))
 
-
-#holy fuck help me, i rlly want slep
 #dump or dumps?
 #Where is my mind?
