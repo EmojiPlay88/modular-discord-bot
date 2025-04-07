@@ -1,5 +1,6 @@
 # Modular Discord Bot
-##PLEASE NOTICE!
+
+## PLEASE NOTICE!
 
 This project is far from being even runnable, so if you want to accelerate the development process, you can make a pull request <3
 
