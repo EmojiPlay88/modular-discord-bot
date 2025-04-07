@@ -1,27 +1,23 @@
 import discord
 import os
 import asyncio
-import configparser
-import json
-from core.perms import checkPermissions, findRole
+import traceback
+
+from core.configHandler import Config
+from core.perms import checkPermissions
 from core.language import getLanguages, openLanguageFile
 from discord import app_commands
 from discord.ext import commands
 from discord.ext.commands import Bot
 
 global token
-global config
 global filename
 
 #Defining the bot
 intents = discord.Intents.all()
 bot = Bot(intents=intents, command_prefix='!')
 
-#Initializing the main config file
-config = configparser.ConfigParser()
-config.read('./configs/main.cfg')
-
-filename = os.path.basename(__file__)
+filename = os.path.basename(__file__)[:-3]
 
 with open('token.txt', 'r') as file:
     token = file.read()
@@ -32,21 +28,20 @@ class MainCommands(commands.Cog):
 
     @commands.hybrid_command(name="setlanguage", description="Set language for the server")
     async def setLanguage(self, interaction:discord.Interaction, language: str):
-        permsAvailable
-        prompt = openLanguageFile(filename[:-3], language)
-        if not checkPermissions(interaction.user, 1024):
+        prompt = openLanguageFile(filename, language)
+        if checkPermissions(interaction.author) == False:
             await interaction.response(text=prompt['setlang']['noperms'])
         else:
-            config['CORE']['language'] = language
+            config = Config('/configs/main.cfg').returnConfig()['CORE']['language']
+            print(config)
             with open("./configs/main.cfg", "w") as configfile:
                 config.write(configfile)
             await interaction.response(text=prompt['langchanged']['success'])
 
+#Error handler
 @bot.event
 async def on_command_error(ctx, error):
-    # Log the error to the console
-    print(f'An error occurred: {error}')
-    # Optionally, send the error message to the Discord channel
+    traceback.print_exception(type(error), error, error.__traceback__)
     await ctx.send(f'An error occurred: {error}')
 
 @bot.event

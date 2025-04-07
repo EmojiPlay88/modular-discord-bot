@@ -1,13 +1,15 @@
+import sys
+import os
 import discord
 
-def checkPermissions(user:discord.Member, permissions:list):
-    roles = user.roles
-    for role in roles:
-        if role.permissions.value & permissions:
-            return True
-    return False
+sys.path.append(os.path.abspath("../core"))
+from core.configHandler import Config
 
-def findRole(user:discord.Member, roleName:str):
+mainConfig = Config('./configs/main.cfg').returnConfig()
+
+def checkPermissions(user:discord.Member):
+    permsAvailable = False
     for role in user.roles:
-        if role.name == roleName:
-            return role
+        if role.id in mainConfig['PERMISSIONS']['setLanguagePerms']:
+            permsAvailable = True
+    return permsAvailable
