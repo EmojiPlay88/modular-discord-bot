@@ -3,6 +3,10 @@ import json
 import os
 from discord.ext import commands
 
+#------------------------------------------
+#ids in data file are stored as str NOT int
+#------------------------------------------
+
 #Create the data file if doesn't exist
 def fileCheck():
     if not os.path.exists("data/levels.json"):
@@ -31,7 +35,15 @@ def guildcheck(guildid):
 def usercheck(guildid, userid):
     levels = loadJson()
     if userid not in levels[guildid]:
-        levels[guildid][userid] = [0,0]
+        levels[guildid][userid] = [0,1]
+        with open("data/levels.json", 'w',encoding='utf=8') as file:
+            json.dump(levels, file)
+
+def lvlup(guildid, userid):
+    levels = loadJson()
+    lvl = levels[guildid][userid][1]
+    if levels[guildid][userid][0] >= 10*lvl:
+        levels[guildid][userid][1] += 1
         with open("data/levels.json", 'w',encoding='utf=8') as file:
             json.dump(levels, file)
 
@@ -52,16 +64,27 @@ class LevelCommands(commands.Cog):
             levels = json.load(file)
         await ctx.send(f'Your xp and level is{levels[guildid][userid][0], levels[guildid][userid][1]}')
 
-    #changed ur @bot.event to @commands.Cog.listener() bc you dont use @bot.event in cogs or whatever it says in docs
     @commands.Cog.listener()
-    async def on_message(message): ##this not finished (Emoji dont touch it!) Edit: gotcha
-        if message.author.bot:
+    async def on_message(self,message):
+        if not message.author.bot:
+            guildid = str(message.guild.id)
+            userid = str(message.author.id)
+            guildcheck(guildid)
+            usercheck(guildid, userid)
+            levels = loadJson()
+            levels[guildid][userid][0] += 5
+            with open("data/levels.json", 'w',encoding='utf=8') as file:
+                json.dump(levels, file)
+            lvlup(guildid, userid)
+        else:
             return
-    
+
 async def setup(bot):
     await bot.add_cog(LevelCommands(bot))
 
 #dump or dumps?
 #Where is my mind?
 
-#copyright gurkinsoft 2025
+#Emoji dont touch it! Edit: gotcha
+
+#copyright gurkinsoft 2025 Edit: whyyyyyyy?
