@@ -19,6 +19,8 @@ bot = Bot(intents=intents, command_prefix='!')
 
 filename = os.path.basename(__file__)[:-3]
 
+config = Config("configs/main.cfg")
+
 with open('token.txt', 'r') as file:
     token = file.read()
 
@@ -27,16 +29,12 @@ class MainCommands(commands.Cog):
         self.bot = bot
 
     @commands.hybrid_command(name="setlanguage", description="Set language for the server")
-    async def setLanguage(self, interaction:discord.Interaction, language: str):
-        prompt = openLanguageFile(filename, language)
-        if checkPermissions(interaction.author) == False:
-            await interaction.response(text=prompt['setlang']['noperms'])
-        else:
-            config = Config('/configs/main.cfg').returnConfig()['CORE']['language']
-            print(config)
-            with open("./configs/main.cfg", "w") as configfile:
-                config.write(configfile)
-            await interaction.response(text=prompt['langchanged']['success'])
+    async def setLanguage(self, ctx, language: str):
+        print(config.returnConfig())
+        config.updateConfig('CORE', 'language', language)
+        config.writeConfig()
+        print(config.returnConfig())
+        await ctx.reply(f'Sucessfully changed language to {language}')
 
 #Error handler
 @bot.event
