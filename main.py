@@ -30,10 +30,10 @@ class MainCommands(commands.Cog):
 
     @commands.hybrid_command(name="setlanguage", description="Set language for the server")
     async def setLanguage(self, ctx, language: str):
-        print(config.returnConfig()['CORE']['language'])
-        config.returnConfig()['CORE']['language'] = language
-        print(config.returnConfig()['CORE']['language'])
+        print(config.returnConfig())
+        config.updateConfig('CORE', 'language', language)
         config.writeConfig()
+        print(config.returnConfig())
         await ctx.reply(f'Sucessfully changed language to {language}')
 
 #Error handler
