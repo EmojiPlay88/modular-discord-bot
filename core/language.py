@@ -10,5 +10,5 @@ def getLanguages():
 
 def openLanguageFile(filename:str, language:str):
     with open(f'./translations/{language}/{filename}.json') as file:
-        file = json.dumps(file.read())
+        file = json.load(file)
         return file
