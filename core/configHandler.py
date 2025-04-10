@@ -1,7 +1,7 @@
 import configparser
 import os
 
-class Config():
+class Config:
     def __init__(self, path:str):
         self.config = configparser.ConfigParser()
         self.path = path
@@ -18,3 +18,7 @@ class Config():
     def writeConfig(self):
         with open(self.path, "w") as file:
             self.config.write(file)
+
+    def parseList(self, section: str, key: str):
+        config = self.returnConfig()[section]
+        return config.get(key.rsplit(","))

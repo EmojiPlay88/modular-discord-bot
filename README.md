@@ -2,7 +2,9 @@
 
 ## PLEASE NOTICE!
 
-This project is far from being even runnable, so if you want to accelerate the development process, you can make a pull request <3
+This project is far from being finished, so if you want to accelerate the development process, you can make a pull request <3
+
+ALSO! This bot is optimized to be used on only one server, if you want to use it on multiple servers, expect low performance... Or just optimize the code yourself...
 
 ## Why
 * This repository is made for people that want to make a custom Discord bot, with proper functional, that is easy to setup and does not require (almost) any coding experience

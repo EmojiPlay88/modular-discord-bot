@@ -1,14 +1,14 @@
-import discord
 import os
 import json
 
 def getLanguages():
     availableLanguages = []
-    for dir in os.listdir('./translations'):
+    for dir in os.listdir('/translations'):
         availableLanguages.append(dir)
     return availableLanguages
 
-def openLanguageFile(filename:str, language:str):
-    with open(f'./translations/{language}/{filename}.json') as file:
-        file = json.load(file)
-        return file
+class TranslationFile:
+    def __init__(self, path: str):
+        self.path = path
+        with open(path, "r") as file:
+            self.prompts = json.load(file)
